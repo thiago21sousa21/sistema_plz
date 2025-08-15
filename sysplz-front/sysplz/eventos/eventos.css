@@ -1,0 +1,27 @@
+@import url('../system_plz.css');
+.breadcrumb { margin-bottom: 1.5rem; }
+.breadcrumb a { text-decoration: none; color: #e76f51; font-weight: bold; }
+.event-card { display: flex; justify-content: space-between; align-items: center; background-color: #f9f9f9; border: 1px solid #ddd; border-left: 5px solid #e76f51; padding: 1rem 1.5rem; margin-bottom: 1rem; border-radius: 5px; }
+.card-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+.button.small { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+.button.danger { background-color: #d62828; color: #fff; }
+.status-flags span { display: inline-block; padding: 0.2rem 0.5rem; margin-right: 0.5rem; font-size: 0.8rem; border-radius: 12px; color: #fff; }
+.status-flags .infracao { background-color: #d62828; }
+.status-flags .consultado { background-color: #fca311; }
+.status-flags .feito { background-color: #2a9d8f; }
+
+/* Adicione ao final de eventos.css */
+.button.success {
+  background-color: #2a9d8f;
+  color: #fff;
+}
+
+.button.edit {
+  background-color: #fca311; /* Cor laranja para destacar */
+  color: #fff;
+}
+
+.card-actions {
+  /* Garante que os botões se ajustem bem */
+  align-items: flex-end;
+}

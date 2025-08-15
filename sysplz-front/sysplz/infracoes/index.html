@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lixo Zero - Painel de Infrações</title>
+  <link rel="stylesheet" href="infracoes.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Painel de Infrações</h1>
+      <a href="../eventos/" class="button">Registrar Novo Evento</a>
+    </header>
+    <nav class="breadcrumb"><a href="../">&larr; Voltar ao Menu</a></nav>
+
+    <section class="filters-container">
+      <input type="search" id="search-input" placeholder="Buscar por placa, autuado, CPF/CNPJ...">
+      <input type="date" id="data-inicio-filter">
+      <input type="date" id="data-fim-filter">
+      <select id="fiscal-filter"><option value="">Todos os Fiscais</option></select>
+      <button id="btn-filter" class="button primary">Filtrar</button>
+      <button id="btn-clear" class="button">Limpar</button>
+    </section>
+
+    <section id="infracoes-table-container">
+      <p>Carregando infrações...</p>
+    </section>
+
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="infracoes.js" type="module"></script>
+</body>
+</html>

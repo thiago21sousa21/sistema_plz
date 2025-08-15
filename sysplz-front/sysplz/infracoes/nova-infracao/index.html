@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><title>Gerar Infração</title><link rel="stylesheet" href="nova-infracao.css"></head>
+<body>
+  <main>
+    <header><h1>Gerar Infração</h1><a href="../../eventos/" class="button">&larr; Voltar</a></header>
+    <section id="resumo-container">
+      <h2>Resumo do Evento</h2>
+      <div id="resumo-evento">Carregando...</div>
+    </section>
+    <hr>
+    <form id="form-gerar-infracao">
+      <div class="form-group">
+        <label for="autuado_id">Selecione o Autuado</label>
+        <select id="autuado_id" required><option value="">Carregando autuados...</option></select>
+      </div>
+      <div class="form-group">
+        <label for="fiscal_id">Selecione o Fiscal Responsável</label>
+        <select id="fiscal_id" required><option value="">Carregando fiscais...</option></select>
+      </div>
+      <button type="submit" class="button success">Confirmar e Gerar Infração</button>
+    </form>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="nova-infracao.js" type="module"></script>
+</body>
+</html>

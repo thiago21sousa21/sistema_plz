@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lixo Zero - Gerenciar Endereço</title>
+  <link rel="stylesheet" href="endereco.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Gerenciar Endereço</h1>
+      <a href="../autuados/" class="button">&larr; Voltar para Autuados</a>
+    </header>
+    
+    <!-- Seção para mostrar o endereço existente -->
+    <section id="display-endereco" class="hidden"></section>
+
+    <!-- Formulário para criar/editar, inicialmente escondido -->
+    <form id="form-endereco" class="hidden">
+      <input type="hidden" id="autuado_id">
+      <div class="form-grid">
+        <div class="form-group"><label for="cep">CEP</label><input type="text" id="cep" required></div>
+        <div class="form-group"><label for="estado">Estado</label><input type="text" id="estado" required></div>
+        <div class="form-group"><label for="cidade">Cidade</label><input type="text" id="cidade" required></div>
+        <div class="form-group"><label for="bairro">Bairro</label><input type="text" id="bairro"></div>
+        <div class="form-group full-width"><label for="logradouro">Logradouro</label><input type="text" id="logradouro"></div>
+        <div class="form-group"><label for="numero">Número</label><input type="text" id="numero"></div>
+        <div class="form-group"><label for="complemento">Complemento</label><input type="text" id="complemento"></div>
+      </div>
+      <button type="submit" class="button primary">Salvar Endereço</button>
+    </form>
+    
+    <div id="message-container"></div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="endereco.js" type="module"></script>
+</body>
+</html>
