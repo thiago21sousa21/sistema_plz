@@ -1,5 +1,5 @@
 # Ignora a pasta de dependências do Node.js em qualquer subdiretório
-/sysplz-api/node_modules
+/syspzl-api/node_modules
 
 # Ignora arquivos de variáveis de ambiente (MUITO IMPORTANTE PARA SEGURANÇA)
 .env
