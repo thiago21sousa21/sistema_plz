@@ -58,11 +58,9 @@ function renderTable(infracoes) {
         <th>ID</th>
         <th>Data/Hora</th>
         <th>Autuado</th>
-        <th>CPF/CNPJ</th>
         <th>Placa</th>
-        <th>Local</th>
         <th>Fiscal</th>
-      </tr>
+        <th>Ações</th> </tr>
     </thead>
     <tbody>
       ${infracoes.map(i => `
@@ -70,10 +68,13 @@ function renderTable(infracoes) {
           <td>${i.infracao_id}</td>
           <td>${new Date(i.momento).toLocaleString('pt-BR')}</td>
           <td>${i.autuado_nome}</td>
-          <td>${i.cpf_cnpj}</td>
           <td>${i.placa}</td>
-          <td>${i.bairro || 'N/A'}, ${i.cidade || 'N/A'}</td>
           <td>${i.fiscal_nome}</td>
+          <td>
+            <a href="${API_URL}/infracoes/${i.infracao_id}/relatorio" class="button small" target="_blank">
+              Gerar Auto
+            </a>
+          </td>
         </tr>
       `).join('')}
     </tbody>

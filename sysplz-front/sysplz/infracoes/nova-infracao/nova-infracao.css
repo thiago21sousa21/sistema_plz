@@ -1,0 +1,12 @@
+/* Adicione ou modifique em nova-infracao.css */
+@import url('../../system_plz.css');
+.search-wrapper { display: flex; gap: 0.5rem; }
+.search-wrapper input { flex-grow: 1; }
+#autuado-result-container {
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+#autuado-result-container.found { border-color: #2a9d8f; background-color: #f0f9f8; }
+#autuado-result-container.not-found { border-color: #e76f51; background-color: #fef5f3; }

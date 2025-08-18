@@ -47,6 +47,15 @@ class AutuadoRepository {
     const [result] = await pool.query('DELETE FROM `autuado` WHERE id = ?', [id]);
     return result;
   }
+
+  async search(query) {
+    const searchTerm = `%${query}%`;
+    const [rows] = await pool.query(
+      'SELECT * FROM `autuado` WHERE id = ? OR cpf_cnpj = ? OR autor LIKE ?',
+      [query, query, searchTerm]
+    );
+    return rows[0]; // Retorna apenas o primeiro resultado para simplicidade
+  }
 }
 
 export default new AutuadoRepository();

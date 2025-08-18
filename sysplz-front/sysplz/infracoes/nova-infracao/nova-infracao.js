@@ -2,9 +2,14 @@ const API_URL = 'http://localhost:5000/api';
 let eventoId = null;
 
 const resumoEventoContainer = document.getElementById('resumo-evento');
-const autuadoSelect = document.getElementById('autuado_id');
 const fiscalSelect = document.getElementById('fiscal_id');
 const form = document.getElementById('form-gerar-infracao');
+
+// Elementos da nova busca
+const autuadoSearchInput = document.getElementById('autuado-search');
+const btnSearchAutuado = document.getElementById('btn-search-autuado');
+const autuadoResultContainer = document.getElementById('autuado-result-container');
+const autuadoIdInput = document.getElementById('autuado_id');
 
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -13,13 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.querySelector('h1').textContent += ` (Evento #${eventoId})`;
     
-    // Carrega todos os dados necessários em paralelo
-    Promise.all([
-        fetchDadosEvento(),
-        populateAutuadosSelect(),
-        populateFiscaisSelect()
-    ]);
+    fetchDadosEvento();
+    populateFiscaisSelect();
     
+    btnSearchAutuado.addEventListener('click', handleSearchAutuado);
     form.addEventListener('submit', handleGerarInfracao);
 });
 
@@ -35,18 +37,6 @@ async function fetchDadosEvento() {
     }
 }
 
-async function populateAutuadosSelect() {
-    try {
-        const { data: autuados } = await axios.get(`${API_URL}/autuados`);
-        autuadoSelect.innerHTML = '<option value="">-- Selecione --</option>';
-        autuados.forEach(a => {
-            autuadoSelect.innerHTML += `<option value="${a.id}">${a.autor} (${a.cpf_cnpj})</option>`;
-        });
-    } catch (err) {
-        autuadoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
-    }
-}
-
 async function populateFiscaisSelect() {
     try {
         const { data: fiscais } = await axios.get(`${API_URL}/fiscais`);
@@ -59,16 +49,49 @@ async function populateFiscaisSelect() {
     }
 }
 
+async function handleSearchAutuado() {
+    const query = autuadoSearchInput.value.trim();
+    console.log(autuadoIdInput)
+    if (!query) {
+        alert("Por favor, digite um termo para a busca.");
+        return;
+    }
+
+    autuadoResultContainer.textContent = 'Buscando...';
+    autuadoResultContainer.className = '';
+    autuadoIdInput.value = '';
+
+    try {
+        const { data: autuado } = await axios.get(`${API_URL}/autuados/search?q=${query}`);
+        autuadoResultContainer.innerHTML = `
+            <p><strong>Autuado Encontrado:</strong> ${autuado.autor}</p>
+            <p><strong>CPF/CNPJ:</strong> ${autuado.cpf_cnpj}</p>
+        `;
+        autuadoResultContainer.className = 'found';
+        autuadoIdInput.value = autuado.id; // Armazena o ID encontrado
+    } catch (error) {
+        autuadoResultContainer.textContent = 'Nenhum autuado encontrado com este termo.';
+        autuadoResultContainer.className = 'not-found';
+    }
+}
+
 async function handleGerarInfracao(e) {
   e.preventDefault();
+
+  const autuadoId = parseInt(autuadoIdInput.value);
+  if (!autuadoId) {
+    alert("Busque e encontre um autuado válido antes de gerar a infração.");
+    return;
+  }
+  
   const infracaoData = {
     evento_id: parseInt(eventoId),
-    autuado_id: parseInt(autuadoSelect.value),
+    autuado_id: autuadoId,
     fiscal_id: parseInt(fiscalSelect.value),
   };
   
-  if (isNaN(infracaoData.autuado_id) || isNaN(infracaoData.fiscal_id)) {
-      alert("Por favor, selecione o autuado e o fiscal.");
+  if (isNaN(infracaoData.fiscal_id)) {
+      alert("Por favor, selecione o fiscal responsável.");
       return;
   }
 

@@ -72,6 +72,10 @@ class AutuadoService {
     return autuado;
   }
 
+  async searchAutuado(query) {
+    return await autuadoRepository.search(query);
+  }
+
 }
 
 export default new AutuadoService();

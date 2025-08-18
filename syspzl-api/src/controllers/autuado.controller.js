@@ -46,15 +46,15 @@ class AutuadoController {
     }
   }
 
-  async getAutuadoByCpfCnpj(req, res, next) {
+  async searchAutuado(req, res, next) {
     try {
-      const { cpf_cnpj } = req.query;
-      if (!cpf_cnpj) {
-        return res.status(400).json({ message: 'Parâmetro cpf_cnpj é obrigatório.' });
+      const { q } = req.query; // 'q' de query (busca)
+      if (!q) {
+        return res.status(400).json({ message: 'Parâmetro de busca "q" é obrigatório.' });
       }
-      const autuado = await autuadoService.getAutuadoByCpfCnpj(cpf_cnpj);
+      const autuado = await autuadoService.searchAutuado(q);
       if (!autuado) {
-        return res.status(404).json({ message: 'Nenhum autuado encontrado com este CPF/CNPJ.' });
+        return res.status(404).json({ message: 'Nenhum autuado encontrado com o termo fornecido.' });
       }
       res.status(200).json(autuado);
     } catch (error) {

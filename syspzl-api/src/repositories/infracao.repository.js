@@ -12,18 +12,14 @@ class InfracaoRepository {
   }
 
   // O método antigo findAll será substituído pelo novo findAllDetailed
-  async findAllDetailed(filters) {
+  async findAllDetailed(filters = {}) { // Adicionado = {} para segurança
     let query = `
       SELECT 
         i.id AS infracao_id,
-        e.momento,
-        e.placa,
-        e.descricao AS evento_descricao,
-        a.autor AS autuado_nome,
-        a.cpf_cnpj,
+        e.momento, e.placa, e.descricao AS evento_descricao, e.local AS evento_local,
+        a.autor AS autuado_nome, a.cpf_cnpj,
         f.nome AS fiscal_nome,
-        end.cidade,
-        end.bairro
+        end.logradouro, end.numero, end.bairro, end.cidade, end.cep, end.estado
       FROM infracao i
       JOIN evento e ON i.evento_id = e.id
       JOIN autuado a ON i.autuado_id = a.id
@@ -34,10 +30,18 @@ class InfracaoRepository {
     const whereClauses = [];
     const queryParams = [];
 
+    // --- SUA SUGESTÃO IMPLEMENTADA AQUI ---
+    // Se um ID for passado nos filtros, adiciona essa condição.
+    if (filters.id) {
+      whereClauses.push(`i.id = ?`);
+      queryParams.push(filters.id);
+    }
+    // --- FIM DA SUA SUGESTÃO ---
+
     if (filters.search) {
       const searchTerm = `%${filters.search}%`;
-      whereClauses.push(`(e.placa LIKE ? OR a.autor LIKE ? OR a.cpf_cnpj LIKE ? OR e.descricao LIKE ?)`);
-      queryParams.push(searchTerm, searchTerm, searchTerm, searchTerm);
+      whereClauses.push(`(e.placa LIKE ? OR a.autor LIKE ? OR a.cpf_cnpj LIKE ?)`);
+      queryParams.push(searchTerm, searchTerm, searchTerm);
     }
     if (filters.fiscalId) {
       whereClauses.push(`f.id = ?`);

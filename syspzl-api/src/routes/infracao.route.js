@@ -10,5 +10,7 @@ infracao.get('/infracoes', infracaoController.getAllInfracoes);
 
 // Rota para criar a infração
 infracao.post('/infracoes', schemaValidation(infracaoSchema), infracaoController.createInfracao);
+infracao.get('/infracoes/:id/relatorio', infracaoController.generateInfracaoReport);
+
 
 export default infracao;

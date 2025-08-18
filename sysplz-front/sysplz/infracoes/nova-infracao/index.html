@@ -10,14 +10,20 @@
     </section>
     <hr>
     <form id="form-gerar-infracao">
+      
       <div class="form-group">
-        <label for="autuado_id">Selecione o Autuado</label>
-        <select id="autuado_id" required><option value="">Carregando autuados...</option></select>
+        <label for="autuado-search">1. Buscar Autuado (por ID, CPF/CNPJ ou Nome)</label>
+        <div class="search-wrapper">
+          <input type="search" id="autuado-search" placeholder="Digite para buscar...">
+          <button type="button" id="btn-search-autuado" class="button">Buscar</button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="fiscal_id">Selecione o Fiscal Responsável</label>
+      <div id="autuado-result-container"></div>
+      <input type="hidden" id="autuado_id"> <div class="form-group">
+        <label for="fiscal_id">2. Selecione o Fiscal Responsável</label>
         <select id="fiscal_id" required><option value="">Carregando fiscais...</option></select>
       </div>
+      
       <button type="submit" class="button success">Confirmar e Gerar Infração</button>
     </form>
   </main>
