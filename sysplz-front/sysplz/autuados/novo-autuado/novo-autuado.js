@@ -1,8 +1,8 @@
 // --- 1. IMPORTE AS NOVAS FUNÇÕES ---
 // O caminho '../..' sobe duas pastas para chegar na raiz de `src/`
 import { maskCpfCnpj, forceUppercase, cleanInput } from '../../../utils/formatters.js';
+import {API_URL} from '../../../config.js';
 
-const API_URL = 'http://localhost:5000/api';
 const form = document.getElementById('form-novo-autuado');
 const messageContainer = document.getElementById('message-container');
 const pageTitle = document.querySelector('h1');

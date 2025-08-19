@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+import {API_URL} from '../../config.js';
 const listContainer = document.getElementById('fiscal-list-container');
 
 async function fetchAndRenderFiscais() {

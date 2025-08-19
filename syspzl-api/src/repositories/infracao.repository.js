@@ -12,32 +12,35 @@ class InfracaoRepository {
   }
 
   // O método antigo findAll será substituído pelo novo findAllDetailed
-  async findAllDetailed(filters = {}) { // Adicionado = {} para segurança
+  async findAllDetailed(filters = {}) {
     let query = `
       SELECT 
         i.id AS infracao_id,
         e.momento, e.placa, e.descricao AS evento_descricao, e.local AS evento_local,
+        e.proveniencia, -- CAMPO ADICIONADO
         a.autor AS autuado_nome, a.cpf_cnpj,
         f.nome AS fiscal_nome,
-        end.logradouro, end.numero, end.bairro, end.cidade, end.cep, end.estado
+        end.logradouro, end.numero, end.bairro, end.cidade, end.cep, end.estado,
+        v.marca_modelo AS veiculo_marca_modelo,
+        cam.local AS camera_local,
+        cam.bairro AS camera_bairro, -- CAMPO ADICIONADO
+        cam.zona AS camera_zona -- CAMPO ADICIONADO
       FROM infracao i
       JOIN evento e ON i.evento_id = e.id
       JOIN autuado a ON i.autuado_id = a.id
       JOIN fiscal f ON i.fiscal_id = f.id
       LEFT JOIN endereco end ON a.id = end.autuado_id
+      LEFT JOIN veiculo v ON e.placa = v.placa
+      LEFT JOIN camera cam ON e.camera_id = cam.id
     `;
 
     const whereClauses = [];
     const queryParams = [];
 
-    // --- SUA SUGESTÃO IMPLEMENTADA AQUI ---
-    // Se um ID for passado nos filtros, adiciona essa condição.
     if (filters.id) {
       whereClauses.push(`i.id = ?`);
       queryParams.push(filters.id);
     }
-    // --- FIM DA SUA SUGESTÃO ---
-
     if (filters.search) {
       const searchTerm = `%${filters.search}%`;
       whereClauses.push(`(e.placa LIKE ? OR a.autor LIKE ? OR a.cpf_cnpj LIKE ?)`);

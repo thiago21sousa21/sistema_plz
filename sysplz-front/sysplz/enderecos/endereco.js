@@ -1,6 +1,6 @@
 import {maskCep, forceUppercase, cleanInput} from '../../utils/formatters.js';
+import {API_URL} from '../../config.js';
 
-const API_URL = 'http://localhost:5000/api';
 const form = document.getElementById('form-endereco');
 const displaySection = document.getElementById('display-endereco');
 const messageContainer = document.getElementById('message-container');
@@ -83,7 +83,7 @@ async function handleFormSubmit(event) {
   event.preventDefault();
   const enderecoData = {
     autuado_id: parseInt(autuadoId),
-    cep: cepInput(cepInput.value),
+    cep: cleanInput(cepInput.value),
     estado: document.getElementById('estado').value,
     cidade: document.getElementById('cidade').value,
     bairro: document.getElementById('bairro').value,

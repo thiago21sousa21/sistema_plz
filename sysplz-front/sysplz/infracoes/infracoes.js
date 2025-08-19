@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+import {API_URL} from '../../config.js';
 const tableContainer = document.getElementById('infracoes-table-container');
 const fiscalFilter = document.getElementById('fiscal-filter');
 const searchInput = document.getElementById('search-input');
@@ -59,8 +59,9 @@ function renderTable(infracoes) {
         <th>Data/Hora</th>
         <th>Autuado</th>
         <th>Placa</th>
-        <th>Fiscal</th>
-        <th>Ações</th> </tr>
+        <th>Veículo</th> <th>Câmera de Origem</th> <th>Fiscal</th>
+        <th>Ações</th>
+      </tr>
     </thead>
     <tbody>
       ${infracoes.map(i => `
@@ -68,8 +69,8 @@ function renderTable(infracoes) {
           <td>${i.infracao_id}</td>
           <td>${new Date(i.momento).toLocaleString('pt-BR')}</td>
           <td>${i.autuado_nome}</td>
-          <td>${i.placa}</td>
-          <td>${i.fiscal_nome}</td>
+          <td>${i.placa || 'N/A'}</td>
+          <td>${i.veiculo_marca_modelo || 'N/A'}</td> <td>${i.camera_local || 'N/A'}</td> <td>${i.fiscal_nome}</td>
           <td>
             <a href="${API_URL}/infracoes/${i.infracao_id}/relatorio" class="button small" target="_blank">
               Gerar Auto

@@ -1,7 +1,7 @@
 import { forceUppercase} from '../../../utils/formatters.js'
 
 // src/system_plz/cameras/nova-camera/nova-camera.js
-const API_URL = 'http://localhost:5000/api';
+import {API_URL} from '../../../config.js';
 
 
 const form = document.getElementById('form-nova-camera');

@@ -1,6 +1,6 @@
 import {maskPlaca, forceUppercase, cleanInput} from '../../utils/formatters.js';
 
-const API_URL = 'http://localhost:5000/api';
+import {API_URL} from '../../config.js';
 const form = document.getElementById('form-veiculo');
 const listContainer = document.getElementById('veiculo-list-container');
 const messageContainer = document.getElementById('message-container');

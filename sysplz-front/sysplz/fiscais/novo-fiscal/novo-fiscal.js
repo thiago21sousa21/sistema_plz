@@ -1,6 +1,6 @@
 import {forceUppercase} from '../../../utils/formatters.js';
 
-const API_URL = 'http://localhost:5000/api';
+import {API_URL} from '../../../config.js';
 const form = document.getElementById('form-novo-fiscal');
 const messageContainer = document.getElementById('message-container');
 const pageTitle = document.querySelector('h1');

@@ -1,6 +1,6 @@
 // src/system_plz/cameras/cameras.js
+import {API_URL} from '../../config.js';
 
-const API_URL = 'http://localhost:5000/api';
 const listContainer = document.getElementById('camera-list-container');
 
 // ... (A função renderCameras será atualizada) ...
