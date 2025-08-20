@@ -19,7 +19,7 @@ function renderFiscais(fiscais) {
   }
   fiscais.forEach(fiscal => {
     const fiscalCard = document.createElement('div');
-    fiscalCard.className = 'fiscal-card';
+    fiscalCard.className = 'card-list-item';
     fiscalCard.setAttribute('data-fiscal-id', fiscal.id);
     fiscalCard.innerHTML = `
       <div>

@@ -19,7 +19,7 @@ function renderCameras(cameras) {
 
   cameras.forEach(camera => {
     const cameraCard = document.createElement('div');
-    cameraCard.className = 'camera-card';
+    cameraCard.className = 'card-list-item';
     // NOVO: Adicionamos um atributo data- para identificar o card facilmente
     cameraCard.setAttribute('data-camera-id', camera.id);
     

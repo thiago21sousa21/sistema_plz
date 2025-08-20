@@ -18,7 +18,7 @@ function renderAutuados(autuados) {
   }
   autuados.forEach(autuado => {
     const autuadoCard = document.createElement('div');
-    autuadoCard.className = 'autuado-card';
+    autuadoCard.className = 'card-list-item';
     autuadoCard.setAttribute('data-autuado-id', autuado.id);
     autuadoCard.innerHTML = `
       <div>
