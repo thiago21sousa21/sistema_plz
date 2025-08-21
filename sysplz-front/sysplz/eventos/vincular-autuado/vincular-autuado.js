@@ -1,6 +1,6 @@
 import { maskCpfCnpj, cleanInput, forceUppercase } from '../../../utils/formatters.js';
 
-const API_URL = 'http://localhost:5000/api';
+import {API_URL} from '../../../config.js';
 let eventoId = null;
 
 const formBusca = document.getElementById('form-busca-autuado');
@@ -8,12 +8,14 @@ const formNovo = document.getElementById('form-novo-autuado');
 const buscaResultadoContainer = document.getElementById('busca-resultado');
 const formNovoContainer = document.getElementById('form-novo-autuado-container');
 const eventoContextoContainer = document.getElementById('evento-contexto');
+const cpfBuscaInput = document.getElementById('cpf_cnpj_busca');
+const cpfNovoInput = document.getElementById('cpf_cnpj_novo');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Aplica máscaras e formatações
     document.getElementById('autor').addEventListener('input', forceUppercase);
-    document.getElementById('cpf_cnpj_busca').addEventListener('input', maskCpfCnpj);
-    document.getElementById('cpf_cnpj_novo').addEventListener('input', maskCpfCnpj);
+    cpfBuscaInput.addEventListener('input', maskCpfCnpj);
+    cpfNovoInput.addEventListener('input', maskCpfCnpj);
     
     // Lógica principal
     const urlParams = new URLSearchParams(window.location.search);
@@ -42,19 +44,26 @@ async function fetchEventoContexto() {
 
 async function handleBuscaSubmit(e) {
   e.preventDefault();
-  const cpfCnpj = cleanInput(document.getElementById('cpf_cnpj_busca').value);
+  const cpfCnpj = cleanInput(cpfBuscaInput.value);
+  if (!cpfCnpj) return;
+
   buscaResultadoContainer.innerHTML = `<p>Buscando...</p>`;
   try {
-    const { data: autuado } = await axios.get(`${API_URL}/autuados/search?cpf_cnpj=${cpfCnpj}`);
+    // --- ESTA É A LINHA QUE FOI CORRIGIDA ---
+    // Trocamos 'cpf_cnpj=' por 'q=' para corresponder à API atualizada.
+    const { data: autuado } = await axios.get(`${API_URL}/autuados/search?q=${cpfCnpj}`);
+    
     buscaResultadoContainer.innerHTML = `
-        <p>Autuado encontrado: <strong>${autuado.autor}</strong></p>
-        <button id="btn-vincular" class="button primary">Concluir Etapa</button>
+        <p style="color: #2a9d8f; font-weight: bold;">Autuado encontrado: ${autuado.autor}</p>
+        <button id="btn-vincular" class="button primary">Concluir Etapa e Vincular</button>
     `;
+    formNovoContainer.classList.add('hidden'); // Esconde o form de novo se encontrar
     document.getElementById('btn-vincular').addEventListener('click', concluirEtapa);
   } catch (error) {
-    buscaResultadoContainer.innerHTML = `<p>Nenhum autuado encontrado com este CPF/CNPJ.</p>`;
-    formNovoContainer.classList.remove('hidden'); // Mostra o formulário de cadastro
-    document.getElementById('cpf_cnpj_novo').value = document.getElementById('cpf_cnpj_busca').value;
+    buscaResultadoContainer.innerHTML = `<p style="color: #e76f51;">Nenhum autuado encontrado. Cadastre-o abaixo.</p>`;
+    formNovoContainer.classList.remove('hidden');
+    cpfNovoInput.value = cpfBuscaInput.value;
+    cpfNovoInput.dispatchEvent(new Event('input')); // Aplica a máscara
   }
 }
 
