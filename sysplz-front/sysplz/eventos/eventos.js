@@ -19,7 +19,7 @@ function renderEventos(eventos) {
   
   eventos.forEach(evento => {
     const eventoCard = document.createElement('div');
-    eventoCard.className = 'event-card';
+    eventoCard.className = 'card-list-item';
     eventoCard.setAttribute('data-evento-id', evento.id);
     
     // --- LÓGICA ATUALIZADA DOS BOTÕES ---

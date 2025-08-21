@@ -1,5 +1,6 @@
 import {API_URL} from '../../../config.js';
 let eventoId = null;
+import {forceUppercase} from "../../../utils/formatters.js"
 
 const resumoEventoContainer = document.getElementById('resumo-evento');
 const fiscalSelect = document.getElementById('fiscal_id');
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchDadosEvento();
     populateFiscaisSelect();
     
+    autuadoSearchInput.addEventListener('input', forceUppercase);
     btnSearchAutuado.addEventListener('click', handleSearchAutuado);
     form.addEventListener('submit', handleGerarInfracao);
 });
