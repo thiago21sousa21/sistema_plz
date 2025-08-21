@@ -39,6 +39,11 @@ class VeiculoRepository {
     const [result] = await pool.query('DELETE FROM `veiculo` WHERE id = ?', [id]);
     return result;
   }
+
+  async deleteByAutuadoId(autuadoId, connection = pool) {
+    const [result] = await connection.query('DELETE FROM `veiculo` WHERE autuado_id = ?', [autuadoId]);
+    return result;
+  }
 }
 
 export default new VeiculoRepository();

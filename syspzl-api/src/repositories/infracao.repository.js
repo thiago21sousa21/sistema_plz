@@ -68,6 +68,11 @@ class InfracaoRepository {
     const [rows] = await pool.query(query, queryParams);
     return rows;
   }
+
+  async deleteByAutuadoId(autuadoId, connection = pool) {
+    const [result] = await connection.query('DELETE FROM `infracao` WHERE autuado_id = ?', [autuadoId]);
+    return result;
+  }
 }
 
 export default new InfracaoRepository();

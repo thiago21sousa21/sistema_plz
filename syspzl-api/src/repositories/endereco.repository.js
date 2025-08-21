@@ -31,6 +31,11 @@ class EnderecoRepository {
     const [result] = await pool.query('DELETE FROM `endereco` WHERE id = ?', [id]);
     return result;
   }
+
+  async deleteByAutuadoId(autuadoId, connection = pool) {
+    const [result] = await connection.query('DELETE FROM `endereco` WHERE autuado_id = ?', [autuadoId]);
+    return result;
+  }
 }
 
 export default new EnderecoRepository();

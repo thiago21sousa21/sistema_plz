@@ -43,8 +43,8 @@ class AutuadoRepository {
     return result;
   }
 
-  async delete(id) {
-    const [result] = await pool.query('DELETE FROM `autuado` WHERE id = ?', [id]);
+  async delete(id, connection = pool) {
+    const [result] = await connection.query('DELETE FROM `autuado` WHERE id = ?', [id]);
     return result;
   }
 

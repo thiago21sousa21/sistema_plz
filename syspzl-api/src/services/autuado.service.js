@@ -1,5 +1,9 @@
 import autuadoRepository from '../repositories/autuado.repository.js';
 import fiscalRepository from '../repositories/fiscal.repository.js';
+import enderecoRepository from '../repositories/endereco.repository.js';
+import veiculoRepository from '../repositories/veiculo.repository.js';
+import infracaoRepository from '../repositories/infracao.repository.js';
+import pool from '../database/database.connection.js';
 
 class AutuadoService {
   async getAllAutuados() {
@@ -62,8 +66,38 @@ class AutuadoService {
   }
 
   async deleteAutuado(id) {
+    // 1. Garante que o autuado que queremos deletar realmente existe
     await this.getAutuadoById(id);
-    return await autuadoRepository.delete(id);
+
+    // 2. Pega uma conexão única do pool que será usada para TODA a operação
+    const connection = await pool.getConnection();
+    
+    try {
+      // 3. Inicia a transação. A partir daqui, nada é permanente até o 'commit'.
+      await connection.beginTransaction();
+
+      // 4. Deleta os registros "filhos", passando a MESMA conexão para todos
+      // A ordem aqui não importa muito, desde que seja antes de deletar o autuado.
+      await infracaoRepository.deleteByAutuadoId(id, connection);
+      await enderecoRepository.deleteByAutuadoId(id, connection);
+      await veiculoRepository.deleteByAutuadoId(id, connection);
+
+      // 5. Finalmente, deleta o "pai" (autuado), também na mesma conexão
+      await autuadoRepository.delete(id, connection);
+
+      // 6. Se todos os 'delete' acima funcionaram sem erro, efetiva as mudanças no banco.
+      await connection.commit();
+
+    } catch (error) {
+      // 7. Se QUALQUER um dos passos acima falhar, desfaz todas as operações anteriores.
+      await connection.rollback();
+      
+      // Propaga o erro para que o controller possa enviá-lo como resposta da API
+      throw error;
+    } finally {
+      // 8. Aconteça o que acontecer (sucesso ou erro), libera a conexão de volta para o pool.
+      connection.release();
+    }
   }
 
   async getAutuadoByCpfCnpj(cpfCnpj) {
