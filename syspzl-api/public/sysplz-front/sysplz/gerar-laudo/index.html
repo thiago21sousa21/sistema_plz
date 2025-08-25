@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysPLZ - Gerar Laudo</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="gerar-laudo.css"> </head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar"> </aside>
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Gerador de Laudo</h1>
+            </header>
+            
+            <form id="form-laudo" class="card">
+                <h3>1. Informações do Cabeçalho</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label for="codigo-fiscal">Código Fiscal (ex: AIXX)</label><input type="text" id="codigo-fiscal" required></div>
+                    <div class="form-group"><label for="numero-auto">Número do Auto (ex: 001)</label><input type="text" id="numero-auto" required></div>
+                    <div class="form-group full-width"><label for="nome-autuado">Nome do Autuado</label><input type="text" id="nome-autuado" required></div>
+                </div>
+                
+                <hr>
+                
+                <h3>2. Anexar Fotos (Máx. 6)</h3>
+                <div id="fotos-container">
+                    </div>
+                <button type="button" id="btn-add-foto" class="btn" style="margin-top: 1rem;">
+                    <i data-feather="plus"></i> Adicionar Foto
+                </button>
+
+                <hr>
+
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i data-feather="download"></i> Gerar e Baixar Laudo
+                </button>
+            </form>
+            <div id="loading-overlay" class="hidden">
+                <div class="spinner"></div>
+                <p>Gerando documento... Isso pode levar alguns segundos.</p>
+            </div>
+        </main>
+    </div>
+    <script>feather.replace()</script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../config.js" type="module"></script>
+    <script src="gerar-laudo.js" type="module"></script>
+</body>
+</html>
