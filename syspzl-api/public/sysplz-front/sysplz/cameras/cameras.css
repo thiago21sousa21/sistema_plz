@@ -1,0 +1,82 @@
+/* Importa os estilos base do módulo principal para manter a consistência */
+@import url('../sysplz.css');
+
+/* Estilos específicos para a página de listagem de câmeras */
+.breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+#camera-list-container .camera-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-left: 5px solid var(--primary-color);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+#camera-list-container .camera-card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.camera-card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
+}
+
+.camera-card p {
+  margin: 0.25rem 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.camera-card p strong {
+    color: #333;
+}
+
+/* Mensagens de status (carregando, erro, vazio) */
+.loading-message,
+.empty-message,
+.error-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+    color: #777;
+}
+
+.error-message {
+    color: #e76f51;
+    font-weight: bold;
+    background-color: #fbeae5;
+    border-radius: 5px;
+}
+
+.camera-card {
+  /* NOVO: Usamos flexbox para alinhar o conteúdo e os botões */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column; /* Botões um em cima do outro */
+  gap: 0.5rem; /* Espaçamento entre os botões */
+}
+
+.button.small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.button.danger {
+  background-color: #e76f51;
+  color: #fff;
+}

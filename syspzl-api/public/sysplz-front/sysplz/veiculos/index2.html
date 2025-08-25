@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lixo Zero - Gerenciar Veículos</title>
+  <link rel="stylesheet" href="veiculos.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Gerenciar Veículos</h1>
+      <a href="../autuados/" class="button">&larr; Voltar para Autuados</a>
+    </header>
+    
+    <section id="veiculo-list-container"></section>
+
+    <hr>
+
+    <section id="form-section">
+      <h3>Adicionar Novo Veículo</h3>
+      <form id="form-veiculo">
+        <input type="hidden" id="autuado_id">
+        <input type="hidden" id="veiculo_id"> <!-- Para modo de edição -->
+        <div class="form-grid">
+          <div class="form-group"><label for="placa">Placa</label><input type="text" id="placa" required></div>
+          <div class="form-group"><label for="marca_modelo">Marca/Modelo</label><input type="text" id="marca_modelo"></div>
+        </div>
+        <button type="submit" class="button primary">Adicionar Veículo</button>
+      </form>
+    </section>
+    
+    <div id="message-container"></div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="veiculos.js" type="module"></script>
+</body>
+</html>

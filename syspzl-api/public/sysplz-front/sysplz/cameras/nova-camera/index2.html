@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lixo Zero - Nova Câmera</title>
+  <link rel="stylesheet" href="nova-camera.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Cadastrar Nova Câmera</h1>
+      <!-- Aponta para a pasta pai (cameras) -->
+      <a href="../" class="button">&larr; Voltar para a lista</a>
+    </header>
+
+    <form id="form-nova-camera">
+      <div class="form-group">
+        <label for="id">ID da Câmera</label>
+        <input type="number" id="id" name="id" required placeholder="Ex: 101">
+        <small>Este é o número de identificação único da câmera.</small>
+      </div>
+      <div class="form-group">
+        <label for="bairro">Bairro</label>
+        <input type="text" id="bairro" name="bairro" required placeholder="Ex: Centro">
+      </div>
+      <div class="form-group">
+        <label for="zona">Zona</label>
+        <input type="text" id="zona" name="zona" required placeholder="Ex: Sul">
+      </div>
+      <div class="form-group">
+        <label for="local">Localização Detalhada</label>
+        <input type="text" id="local" name="local" required placeholder="Ex: Praça da Bandeira, poste 3">
+      </div>
+      <button type="submit" class="button primary">Cadastrar</button>
+    </form>
+
+    <div id="message-container"></div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="nova-camera.js" type="module"></script>
+</body>
+</html>

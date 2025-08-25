@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysPLZ - Painel Principal</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <link rel="stylesheet" href="assets/css/main.css"> 
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <header class="sidebar-header"><span class="logo">SYSPLZ</span></header>
+            <nav class="sidebar-nav">
+                <a href="/sysplz/" class="nav-item active">
+                    <i data-feather="home"></i><span>Painel Principal</span>
+                </a>
+                <a href="/sysplz/eventos/" class="nav-item">
+                    <i data-feather="alert-triangle"></i><span>Gerenciar Eventos</span>
+                </a>
+                <a href="/sysplz/infracoes/" class="nav-item">
+                    <i data-feather="file-text"></i><span>Painel de Infrações</span>
+                </a>
+                <a href="/sysplz/autuados/" class="nav-item">
+                    <i data-feather="users"></i><span>Gerenciar Autuados</span>
+                </a>
+                <a href="/sysplz/fiscais/" class="nav-item">
+                    <i data-feather="shield"></i><span>Gerenciar Fiscais</span>
+                </a>
+                <a href="/sysplz/cameras/" class="nav-item">
+                    <i data-feather="camera"></i><span>Gerenciar Câmeras</span>
+                </a>
+                <!-- <a href="/sysplz/veiculos/" class="nav-item">
+                    <i data-feather="truck"></i>
+                    <span>Gerenciar Veículos</span>
+                </a> -->
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Bem-vindo ao Painel SysPLZ</h1>
+                    <p id="current-date" class="subtitle">Carregando data...</p>
+                </div>
+            </header>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <i data-feather="alert-triangle"></i>
+                    <div class="stat-info">
+                        <span class="stat-number" id="stats-eventos">--</span>
+                        <span class="stat-label">Eventos Registrados</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i data-feather="file-text"></i>
+                    <div class="stat-info">
+                        <span class="stat-number" id="stats-infracoes">--</span>
+                        <span class="stat-label">Infrações Geradas</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i data-feather="users"></i>
+                    <div class="stat-info">
+                        <span class="stat-number" id="stats-autuados">--</span>
+                        <span class="stat-label">Autuados Cadastrados</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="quick-actions card">
+                <h2>Ações Rápidas</h2>
+                <div class="actions-grid">
+                    <a href="eventos/novo-evento/" class="action-item">
+                        <i data-feather="plus-circle"></i>
+                        <span>Registrar Novo Evento</span>
+                    </a>
+                    <a href="infracoes/" class="action-item">
+                        <i data-feather="search"></i>
+                        <span>Consultar Infrações</span>
+                    </a>
+                    <a href="autuados/novo-autuado/" class="action-item">
+                        <i data-feather="user-plus"></i>
+                        <span>Cadastrar Autuado</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="sysplz.js" type="module"></script>
+    <script>feather.replace()</script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../config.js" type="module"></script> 
+</body>
+</html>

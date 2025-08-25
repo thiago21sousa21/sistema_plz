@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysPLZ - Sistema Lixo Zero</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="../../assets/css/main.css"> 
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <span class="logo">SYSPLZ</span>
+            </header>
+            <nav class="sidebar-nav">
+                <a href="/sysplz/" class="nav-item active">
+                    <i data-feather="home"></i>
+                    <span>Painel Principal</span>
+                </a>
+                <a href="/sysplz/eventos/" class="nav-item">
+                    <i data-feather="alert-triangle"></i>
+                    <span>Gerenciar Eventos</span>
+                </a>
+                <a href="/sysplz/infracoes/" class="nav-item">
+                    <i data-feather="file-text"></i>
+                    <span>Painel de Infrações</span>
+                </a>
+                <a href="/sysplz/autuados/" class="nav-item">
+                    <i data-feather="users"></i>
+                    <span>Gerenciar Autuados</span>
+                </a>
+                <a href="/sysplz/fiscais/" class="nav-item">
+                    <i data-feather="shield"></i>
+                    <span>Gerenciar Fiscais</span>
+                </a>
+                <a href="/sysplz/cameras/" class="nav-item">
+                    <i data-feather="camera"></i>
+                    <span>Gerenciar Câmeras</span>
+                </a>
+                 <a href="/sysplz/veiculos/" class="nav-item">
+                    <i data-feather="truck"></i>
+                    <span>Gerenciar Veículos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+          <header><h1>Cadastrar Novo Autuado</h1><a href="../" class="button">&larr; Voltar</a></header>
+          <form id="form-novo-autuado">
+            <div class="form-group">
+              <label for="autor">Nome / Razão Social</label>
+              <input type="text" id="autor" required>
+            </div>
+            <div class="form-group">
+              <label for="cpf_cnpj">CPF / CNPJ</label>
+              <input type="text" id="cpf_cnpj" required maxlength="18">
+            </div>
+            <div class="form-group">
+              <label for="fiscal_id">ID do Fiscal Responsável (Opcional)</label>
+              <input type="number" id="fiscal_id">
+            </div>
+            <button type="submit" class="button primary">Cadastrar</button>
+          </form>
+          <div id="message-container"></div>
+        </main>
+    </div>
+
+    <script>
+      feather.replace();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="novo-autuado.js" type="module"></script>
+</body>
+</html>

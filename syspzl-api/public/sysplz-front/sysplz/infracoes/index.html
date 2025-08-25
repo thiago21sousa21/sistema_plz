@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysPLZ - Sistema Lixo Zero</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="../assets/css/main.css"> 
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <span class="logo">SYSPLZ</span>
+            </header>
+            <nav class="sidebar-nav">
+                <a href="/sysplz/" class="nav-item active">
+                    <i data-feather="home"></i>
+                    <span>Painel Principal</span>
+                </a>
+                <a href="/sysplz/eventos/" class="nav-item">
+                    <i data-feather="alert-triangle"></i>
+                    <span>Gerenciar Eventos</span>
+                </a>
+                <a href="/sysplz/infracoes/" class="nav-item">
+                    <i data-feather="file-text"></i>
+                    <span>Painel de Infrações</span>
+                </a>
+                <a href="/sysplz/autuados/" class="nav-item">
+                    <i data-feather="users"></i>
+                    <span>Gerenciar Autuados</span>
+                </a>
+                <a href="/sysplz/fiscais/" class="nav-item">
+                    <i data-feather="shield"></i>
+                    <span>Gerenciar Fiscais</span>
+                </a>
+                <a href="/sysplz/cameras/" class="nav-item">
+                    <i data-feather="camera"></i>
+                    <span>Gerenciar Câmeras</span>
+                </a>
+                 <!-- <a href="/sysplz/veiculos/" class="nav-item">
+                    <i data-feather="truck"></i>
+                    <span>Gerenciar Veículos</span>
+                </a> -->
+            </nav>
+        </aside>
+
+        <main class="main-content">
+          <header>
+            <h1>Painel de Infrações</h1>
+            <a href="../eventos/" class="button">Registrar Novo Evento</a>
+          </header>
+          <nav class="breadcrumb"><a href="../">&larr; Voltar ao Menu</a></nav>
+
+          <section class="filters-container">
+            <input type="search" id="search-input" placeholder="Buscar por placa, autuado, CPF/CNPJ...">
+            <input type="date" id="data-inicio-filter">
+            <input type="date" id="data-fim-filter">
+            <select id="fiscal-filter"><option value="">Todos os Fiscais</option></select>
+            <button id="btn-filter" class="button primary">Filtrar</button>
+            <button id="btn-clear" class="button">Limpar</button>
+          </section>
+
+          <section id="infracoes-table-container">
+            <p>Carregando infrações...</p>
+          </section>
+        </main>
+    </div>
+
+    <script>
+      feather.replace();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="infracoes.js" type="module"></script>
+</body>
+</html>

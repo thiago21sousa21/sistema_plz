@@ -1,0 +1,9 @@
+@import url('../../system_plz.css'); /* Importa estilos base */
+
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+.form-group input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
+form button { width: 100%; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
+#message-container .message { padding: 1rem; margin-top: 1rem; border-radius: 5px; color: #fff; text-align: center; }
+.message.error { background-color: #d62828; }
+.message.success { background-color: #0077b6; }
