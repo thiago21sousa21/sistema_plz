@@ -21,6 +21,13 @@ function formatCpf(cpf = '') {
   return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 }
 
+function formatPlaca(placa = '') {
+  //vou fazer um padrão que apenas coloca um hífen depois dos 3 primeiros caracteres
+  const cleaned = (placa || '').replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+  if (cleaned.length !== 7) return placa; // Retorna o original se não tiver 7 caracteres
+  return cleaned.replace(/(\w{3})(\w{4})/, '$1-$2');
+}
+
 /**
  * Formata um CNPJ (apenas números) para o padrão XX.XXX.XXX/XXXX-XX.
  */
@@ -62,6 +69,7 @@ class InfracaoService {
 
   async generateReportForInfracao(id) {
     const infracaoData = await this.getSingleInfracaoDetailed(id);
+    //console.log('#####PARA DEPURAÇÃO: ',infracaoData);
     
     const workbook = new ExcelJS.Workbook();
     const templatePath = path.join(process.cwd(), 'templates', 'modelo-auto-de-infracao.xlsx');
@@ -88,6 +96,7 @@ class InfracaoService {
     worksheet.getCell('AL15').value = formatCep(infracaoData.cep);
 
     worksheet.getCell('N17').value = infracaoData.bairro;
+    worksheet.getCell('E17').value = infracaoData.numero;
     
     if (infracaoData.proveniencia) {
         worksheet.getCell('B21').value = infracaoData.proveniencia.toUpperCase();
@@ -101,11 +110,11 @@ class InfracaoService {
 
     const localInfracao = infracaoData.camera_local || infracaoData.evento_local || 'Local não informado';
     worksheet.getCell('D24').value = localInfracao;
-
+    worksheet.getCell('E26').value = "S/N"
     worksheet.getCell('N26').value = infracaoData.camera_bairro;
     worksheet.getCell('AL26').value = infracaoData.camera_zona;
 
-    const textoFlagrante = `FLAGRANTE REALIZADO POR VIDEOMONITORAMENTO, VEÍCULO ${infracaoData.veiculo_marca_modelo || 'NÃO IDENTIFICADO'} DE PLACA ${infracaoData.placa || 'NÃO IDENTIFICADA'}`;
+    const textoFlagrante = `FLAGRANTE REALIZADO POR VIDEOMONITORAMENTO, VEÍCULO ${infracaoData.veiculo_marca_modelo || 'NÃO IDENTIFICADO'} DE PLACA ${formatPlaca(infracaoData.placa) || 'NÃO IDENTIFICADA'}`;
     worksheet.getCell('F42').value = textoFlagrante;
     
     return workbook;
