@@ -1,66 +1,66 @@
-import { Document, Packer, Paragraph, TextRun, ImageRun } from 'docx';
-import { fileURLToPath } from 'url';
+import fs from 'fs';
 import path from 'path';
+import PizZip from 'pizzip';
+import Docxtemplater from 'docxtemplater';
+import ImageModule from 'docxtemplater-image-module-free';
 
-// Função auxiliar para converter cm para EMUs (unidade que o docx usa)
-function cmToEMU(cm) {
-  return Math.round(cm * 360000);
+// Função auxiliar para converter cm para pixels (aproximadamente) para o módulo de imagem
+function cmToPixels(cm) {
+  return Math.round(cm * 37.795);
 }
 
 class LaudoService {
   async generateLaudo(laudoData, fotos) {
-    const { codigoFiscal, numeroAuto, nomeAutuado, orientacoes } = laudoData;
-    const ano = new Date().getFullYear();
+    // 1. Carrega o conteúdo do arquivo modelo .docx
+    const templatePath = path.join(process.cwd(), 'templates', 'modelo-laudo.docx');
+    const content = fs.readFileSync(templatePath, 'binary');
 
-    // Monta a linha de título
-    const titulo = `${codigoFiscal} - ${numeroAuto}/${ano} - ${nomeAutuado}`.toUpperCase();
+    // 2. Descompacta o conteúdo do Word (um .docx é um .zip)
+    const zip = new PizZip(content);
 
-    const children = [
-      new Paragraph({
-        children: [new TextRun({ text: titulo, bold: true, size: 24 })], // 12pt font
-      }),
-      new Paragraph({ text: "" }), // Linha em branco
-    ];
-
-    // Adiciona as imagens ao documento
-    fotos.forEach((foto, index) => {
-      // O frontend envia as orientações como uma string 'retrato,paisagem,...' ou um array
-      const orientacao = Array.isArray(orientacoes) ? orientacoes[index] : orientacoes.split(',')[index];
-      
-      let width, height;
-      if (orientacao === 'retrato') {
-        width = cmToEMU(10);
-        height = cmToEMU(14);
-      } else { // Paisagem (padrão)
-        width = cmToEMU(15);
-        height = cmToEMU(7);
-      }
-
-      children.push(
-        new Paragraph({
-          children: [
-            new ImageRun({
-              data: foto.buffer, // Pega a imagem da memória
-              transformation: {
-                width: width,
-                height: height,
-              },
-            }),
-          ],
-        })
-      );
-      children.push(new Paragraph({ text: "" })); // Linha em branco entre fotos
+    // 3. Configura o módulo de imagem
+    const imageModule = new ImageModule({
+      // Função que é chamada para cada tag de imagem
+      getImage: (tag) => {
+        // 'tag' aqui é o buffer da imagem que passamos nos dados
+        return tag;
+      },
+      // Função que define o tamanho da imagem
+      getSize: (img, tagValue, tagName) => {
+        // Por enquanto, vamos manter um tamanho fixo para todas as imagens
+        // A lógica de retrato/paisagem pode ser adicionada aqui depois se necessário
+        const width = cmToPixels(15);
+        const height = cmToPixels(7);
+        return [width, height];
+      },
     });
 
-    const doc = new Document({
-      sections: [{
-        properties: {},
-        children: children,
-      }],
+    // 4. Cria a instância do Docxtemplater com o módulo de imagem
+    const doc = new Docxtemplater(zip, {
+      modules: [imageModule],
+      // Em caso de tags não encontradas, não quebra a aplicação
+      nullGetter: () => "",
     });
 
-    // Converte o documento em um buffer para ser enviado na resposta
-    const buffer = await Packer.toBuffer(doc);
+    // 5. Prepara o objeto de dados que corresponde às tags no modelo
+    const dataToRender = {
+      codigo_fiscal: laudoData.codigoFiscal,
+      numero_auto: laudoData.numeroAuto,
+      ano: new Date().getFullYear(),
+      nome_autuado: laudoData.nomeAutuado,
+      // Passamos os buffers das fotos para a tag de loop {#fotos}
+      fotos: fotos.map(f => f.buffer),
+    };
+
+    // 6. Preenche o modelo com os dados
+    doc.render(dataToRender);
+
+    // 7. Gera o novo documento .docx como um buffer
+    const buffer = doc.getZip().generate({
+      type: 'nodebuffer',
+      compression: 'DEFLATE',
+    });
+
     return buffer;
   }
 }

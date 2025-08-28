@@ -8,6 +8,7 @@ class LaudoController {
       const laudoData = req.body;
       const fotos = req.files;
 
+      console.log('Fotos recebidas pela API:', fotos);
       const fileBuffer = await laudoService.generateLaudo(laudoData, fotos);
       
       const fileName = `laudo_${laudoData.numeroAuto}_${new Date().getFullYear()}.docx`;

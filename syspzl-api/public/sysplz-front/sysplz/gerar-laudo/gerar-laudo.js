@@ -7,12 +7,12 @@ const loadingOverlay = document.getElementById('loading-overlay');
 let fotoCounter = 0;
 
 function addFotoInput() {
-  if (fotoCounter >= 6) {
-    alert("Limite de 6 fotos atingido.");
+  if (fotoCounter >= 10) {
+    alert("Limite de 10 fotos atingido.");
     return;
   }
   fotoCounter++;
-  const isMap = fotoCounter === 6;
+  const isMap = fotoCounter === 10;
   const row = document.createElement('div');
   row.className = 'foto-row';
   row.innerHTML = `
@@ -55,7 +55,7 @@ async function handleFormSubmit(event) {
 
   try {
     const response = await axios.post(`${API_URL}/laudos/gerar`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+    
       responseType: 'blob', // MUITO IMPORTANTE: para receber um arquivo
     });
 

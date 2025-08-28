@@ -1,7 +1,0 @@
-@import url('../../sysplz.css');
-#evento-contexto { background-color: #fefae0; padding: 1rem; border-radius: 5px; }
-.form-inline { display: flex; gap: 1rem; }
-.form-inline input { flex-grow: 1; }
-.hidden { display: none; }
-hr { margin: 1.5rem 0; border: 1px solid #eee; }
-#busca-resultado { margin-top: 1rem; }
