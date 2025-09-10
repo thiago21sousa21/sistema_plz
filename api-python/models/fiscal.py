@@ -20,3 +20,4 @@ class Fiscal:
     @property
     def codigo(self):
         return self.codigo
+    
