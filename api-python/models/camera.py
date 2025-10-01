@@ -21,3 +21,5 @@ class Camera:
     def local(self):
         return self.__local
     
+    def __str__(self):
+        return f"\nid={self.id} \nbairro={self.bairro} \nzona={self.zona} \nlocal={self.local} "

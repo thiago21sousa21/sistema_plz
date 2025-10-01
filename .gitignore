@@ -15,3 +15,6 @@ Thumbs.db
 **.venv 
 **/.env # Ignora ambientes virtuais Python em qualquer subdiretório
 **.env 
+**.pyc
+**/__pycache__
+/api-python/connection/__pycache__

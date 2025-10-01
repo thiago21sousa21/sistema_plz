@@ -1,11 +1,12 @@
+from models.autuado import Autuado
 class Endereco:
-    def __init__(
+    def __init__(*,
             self, 
-            logradouro, 
+            logradouro =None, 
             cidade, 
             estado, 
             cep,
-            bairro,
+            bairro=None,
             autuado:Autuado,
             numero=None, 
             complemento=None,
@@ -56,3 +57,6 @@ class Endereco:
     @property
     def autuado(self):
         return self.autuado
+    
+    def __str__(self):
+        return f"\nLogradouro: {self.logradouro}\nNúmero: {self.numero}\nBairro: {self.bairro}\nCidade: {self.cidade}\nEstado: {self.estado}\nCEP: {self.cep}\nComplemento: {self.complemento}\nZona: {self.zona}\nAutuado: {self.autuado}"

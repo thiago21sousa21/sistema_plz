@@ -1,3 +1,5 @@
+from models.autuado import Autuado
+
 class Veiculo:
     def __init__(
             self,
@@ -32,5 +34,8 @@ class Veiculo:
     @property
     def autuado(self):
         return self.autuado
+    
+    def __str__(self):
+        return f"\nplaca: {self.placa}\nmodelo: {self.modelo}\ncor: {self.cor}\nano: {self.ano}\nautuado: {self.autuado}"
     
     

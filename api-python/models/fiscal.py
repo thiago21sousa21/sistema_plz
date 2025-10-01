@@ -21,3 +21,6 @@ class Fiscal:
     def codigo(self):
         return self.codigo
     
+    def __str__(self):
+        return f"\nnome: {self.nome}\nmatricula: {self.matricula}\ncodigo: {self.codigo}"
+    
