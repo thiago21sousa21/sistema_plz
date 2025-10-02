@@ -21,12 +21,16 @@ evento = EventoCamera(
     momento=None
 )
 
-def ver_cameras():
+def inserir_camera():
     with DatabaseConnection(
-        "escola"
+        "lixozerodb_teste"
     ) as db:
-        cameras = db.fetch_all("SELECT * FROM professores")
-        for camera in cameras:
-            print(camera)
+        sql = """
+        INSERT INTO camera (id, bairro, zona, local)
+        VALUES (%s, %s, %s, %s)
+        """
+        values = (cam.id, cam.bairro, cam.zona, cam.local)
+        db.execute_query(sql, values)
+        print("Camera inserida com sucesso!")
 
-print(ver_cameras())
+inserir_camera()

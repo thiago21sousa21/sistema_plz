@@ -1,10 +1,10 @@
 class Fiscal:
     def __init__(
-            self, 
-            nome: str, 
-            matricula: str,
-            codigo: str = None,
-        ):
+        self, 
+        nome: str, 
+        matricula: str,
+        codigo: str = None,
+    ):
         self.nome = nome
         self.matricula = matricula
         self.codigo = codigo
