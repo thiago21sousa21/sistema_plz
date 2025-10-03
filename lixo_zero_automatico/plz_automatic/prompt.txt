@@ -1,0 +1,60 @@
+📌 Prompt para explicar meu projeto do zero:
+
+💻 Projeto: [Nome do Projeto]
+📂 O que ele faz?
+"[Descreva brevemente a finalidade do projeto. Exemplo: 'Esse projeto automatiza o preenchimento de autos de infração com base em planilhas de dados de veículos e fiscais.']"
+
+🗂 Estrutura de pastas e arquivos
+Aqui está a estrutura do projeto e a função de cada parte:
+
+bash
+Copiar
+Editar
+meu_projeto/  
+│── data/                     # 📂 Armazena planilhas e arquivos de dados  
+│   ├── plzdata.xlsx          # 📄 Planilha com dados dos veículos e proprietários  
+│   ├── diariovideo.xlsx      # 📄 Planilha com registros de infrações  
+│   ├── auto.xlsx             # 📄 Modelo de auto de infração  
+│   ├── auto_preenchido.xlsx  # 📄 Auto de infração gerado automaticamente  
+│── src/                      # 📂 Código-fonte principal  
+│   ├── __init__.py           # 📌 Indica que src é um pacote Python  
+│   ├── app.py                # 🚀 Arquivo principal que executa o programa  
+│   ├── preencher_auto.py      # 📝 Lógica para preencher os autos com base nos dados  
+│   ├── conexao.py             # 🌐 Código para conexão com APIs (se houver)  
+│   ├── dados_camera.py        # 📍 Informações sobre localização de câmeras  
+│   ├── fiscais.py             # 👮‍♂️ Dados dos fiscais responsáveis pelas infrações  
+│   ├── config.py              # ⚙️ Armazena caminhos de arquivos e configurações gerais  
+│── config/                   # 📂 Configurações sensíveis  
+│   ├── .env                   # 🔐 Variáveis de ambiente (chaves de API, credenciais)  
+│   ├── token.json             # 🔐 Token de autenticação  
+│── venv/                     # 📂 Ambiente virtual do Python  
+│── .gitignore                # 📄 Arquivos ignorados pelo Git  
+│── requirements.txt          # 📄 Dependências do projeto  
+🔧 O que cada função faz?
+📌 app.py
+Executa o programa principal
+
+Chama a função preencher_auto passando uma matrícula, placa ou CPF.
+
+📌 preencher_auto.py
+Lê dados das planilhas (plzdata.xlsx, diariovideo.xlsx)
+
+Normaliza placas (remove hífens, espaços, padroniza maiúsculas)
+
+Preenche a planilha do auto de infração (auto.xlsx)
+
+Insere informações do fiscal caso seja fornecido um código ou matrícula
+
+📌 fiscais.py
+Dicionário que relaciona fiscais a códigos e matrículas
+
+📌 dados_camera.py
+Dicionário que mapeia números de câmeras para bairros e zonas
+
+📌 config.py
+Define diretórios e caminhos de arquivos
+
+Carrega configurações do .env
+
+📌 conexao.py
+Gerencia conexão com APIs (se aplicável)

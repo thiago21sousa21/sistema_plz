@@ -1,0 +1,5 @@
+config/.env
+config/credentials.json
+config/token.json
+venv
+__pycache__

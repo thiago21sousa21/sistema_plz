@@ -18,3 +18,4 @@ Thumbs.db
 **.pyc
 **/__pycache__
 /api-python/connection/__pycache__
+**/node_modules
