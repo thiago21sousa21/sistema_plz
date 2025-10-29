@@ -7,3 +7,6 @@ class FiscalBase(BaseModel):
 
 class Fiscal(FiscalBase):
     id:int
+
+class CreateFiscal(FiscalBase):
+    pass
