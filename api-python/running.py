@@ -1,30 +1,13 @@
-import os
-from dotenv import load_dotenv
-import mysql.connector
+from database.test.consultas.consultas_auxiliares import ConsultasAuxiliares
 
-load_dotenv(".env")
+consultas = ConsultasAuxiliares()
 
-config = {
-    "user": os.getenv("DB_USER", "root"),
-    "password": os.getenv("DB_PASSWORD", "password"),
-    "host": os.getenv("DB_HOST", "localhost")
-}
+consultas.ver_bancos()
 
-connexao = mysql.connector.connect(**config)
-
-if __name__ == "__main__":
-    base_dir = os.path.dirname(os.path.abspath(__file__))  
-    sql_path = os.path.join(base_dir, "database", "test", "creations", "001_create_tables_without_relation.sql")
-
-    with open(sql_path, "r") as file:
-        sql_script = file.read()
-
-    cursor = connexao.cursor()
-
-    for query in sql_script.split(";"):
-        if query.strip():  
-            cursor.execute(query)
-            print(f"Executed query: {query.strip()}")
-    connexao.commit()
-    cursor.close()
-    connexao.close()
+consultas.ver_colunas_tabela('lixozerodb_teste', 'fiscal')
+consultas.ver_colunas_tabela('lixozerodb_teste', 'autuado')
+consultas.ver_colunas_tabela('lixozerodb_teste', 'camera')
+consultas.ver_colunas_tabela('lixozerodb_teste', 'endereco')
+consultas.ver_colunas_tabela('lixozerodb_teste', 'evento')
+consultas.ver_colunas_tabela('lixozerodb_teste', 'infracao')
+consultas.ver_colunas_tabela('lixozerodb_teste', 'veiculo')

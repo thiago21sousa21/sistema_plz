@@ -1,6 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 from src.repositorios.camera_repository import CameraRepository
-from src.schemas.camera import Camera
+from src.schemas.camera import CreateCamera, Camera
 camera_router = APIRouter()
 
 camera_repository = CameraRepository()
@@ -9,6 +9,11 @@ camera_repository = CameraRepository()
 def listar_cameras():
     return camera_repository.buscar_varios()
 
-@camera_router.post("/")
-def inserir_camera():
-    camera_repository.criar(Camera(id=1, bairro="GURUPI", zona="SUDESTE", referencia_local="PERTO DA UPA"))
+@camera_router.get("/{id}")
+def buscar_uma(id:int):
+    return camera_repository.buscar_por_id(id)
+
+@camera_router.post("/", status_code=status.HTTP_201_CREATED)
+def inserir_camera(dados: CreateCamera):
+    camera:Camera = Camera(**dados.model_dump())
+    return camera_repository.criar(camera)
