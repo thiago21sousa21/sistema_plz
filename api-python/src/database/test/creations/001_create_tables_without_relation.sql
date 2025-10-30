@@ -19,6 +19,10 @@ CREATE TABLE IF NOT EXISTS autuado (
   PRIMARY KEY (id)
 );
 
+ALTER TABLE autuado
+  ADD CONSTRAINT fk_field_fiscal_id_references_fisca_id
+  FOREIGN KEY (fiscal_id) REFERENCES fiscal(id);
+
 CREATE TABLE IF NOT EXISTS camera (
   id INT NOT NULL,
   bairro VARCHAR(45) NOT NULL,

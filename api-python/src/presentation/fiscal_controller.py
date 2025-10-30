@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 
-from src.repositorios.fiscal_repository import FiscalRepository
+from src.repositorio.fiscal_repository import FiscalRepository
 from src.schemas.fiscal import CreateFiscal
 
 fiscal_router = APIRouter()
