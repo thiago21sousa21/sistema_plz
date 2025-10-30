@@ -1,3 +1,4 @@
+ 
 from src.repositorio.veiculo_repository import VeiculoRepository
 from src.repositorio.autuado_repository import AutuadoRepository
 from src.schemas.veiculo import VeiculoCreate
