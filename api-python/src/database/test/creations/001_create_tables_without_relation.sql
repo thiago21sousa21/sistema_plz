@@ -19,9 +19,6 @@ CREATE TABLE IF NOT EXISTS autuado (
   PRIMARY KEY (id)
 );
 
-ALTER TABLE autuado
-  ADD CONSTRAINT fk_field_fiscal_id_references_fisca_id
-  FOREIGN KEY (fiscal_id) REFERENCES fiscal(id);
 
 CREATE TABLE IF NOT EXISTS camera (
   id INT NOT NULL,
@@ -76,3 +73,15 @@ CREATE TABLE IF NOT EXISTS veiculo (
   cor VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
 );
+
+ALTER TABLE autuado
+  ADD CONSTRAINT FK_autuado_fiscal_id_REF_fiscal_id
+  FOREIGN KEY (fiscal_id) REFERENCES fiscal(id);
+
+ALTER TABLE veiculo
+  ADD CONSTRAINT FK_veiculo_autuado_id_REF_autuado_id
+  FOREIGN KEY (autuado_id) REFERENCES autuado(id);
+
+ALTER TABLE endereco
+  ADD CONSTRAINT FK_endereco_autuado_id_REF_autuado_id
+  FOREIGN KEY (autuado_id) REFERENCES autuado(id);
