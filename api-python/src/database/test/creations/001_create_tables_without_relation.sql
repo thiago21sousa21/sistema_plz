@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS evento (
   momento DATETIME NOT NULL,
   proveniencia VARCHAR(45) NOT NULL,
   placa CHAR(7) NULL DEFAULT NULL,
-  descricao VARCHAR(100) NULL DEFAULT NULL,
   referencia_local VARCHAR(100) NULL DEFAULT NULL,
   coordenada POINT NULL DEFAULT NULL,
   e_infracao TINYINT NULL DEFAULT '0',
@@ -85,3 +84,9 @@ ALTER TABLE veiculo
 ALTER TABLE endereco
   ADD CONSTRAINT FK_endereco_autuado_id_REF_autuado_id
   FOREIGN KEY (autuado_id) REFERENCES autuado(id);
+
+ALTER TABLE evento
+  ADD CONSTRAINT FK_evento_fiscal_id_REF_fiscal_id
+    FOREIGN KEY (fiscal_id) REFERENCES fiscal(id),
+  ADD CONSTRAINT FK_evento_camera_id_REF_camera_id
+    FOREIGN KEY (camera_id) REFERENCES camera(id);
