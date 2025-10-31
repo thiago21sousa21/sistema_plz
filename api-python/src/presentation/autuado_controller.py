@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from src.schemas.autuado import AutuadoCreate
-from src.repositorio.autuado_repository import AutuadoRepository
+from src.persistence.autuado_repository import AutuadoRepository
 from src.service.autuado_service import AutuadoService
 
 autuado_router = APIRouter()

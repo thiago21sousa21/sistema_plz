@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from src.schemas.endereco import EnderecoCreate
-from src.repositorio.endereco_repository import  EnderecoRepository
+from src.persistence.endereco_repository import  EnderecoRepository
 from src.service.endereco_service import EnderecoService
 
 endereco_router = APIRouter()

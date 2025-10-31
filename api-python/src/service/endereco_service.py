@@ -1,5 +1,5 @@
-from src.repositorio.endereco_repository import EnderecoRepository
-from src.repositorio.autuado_repository import AutuadoRepository
+from src.persistence.endereco_repository import EnderecoRepository
+from src.persistence.autuado_repository import AutuadoRepository
 from src.schemas.endereco import EnderecoCreate
 
 

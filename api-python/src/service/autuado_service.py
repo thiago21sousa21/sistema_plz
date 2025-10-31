@@ -1,5 +1,5 @@
-from src.repositorio.autuado_repository import AutuadoRepository
-from src.repositorio.fiscal_repository import FiscalRepository
+from src.persistence.autuado_repository import AutuadoRepository
+from src.persistence.fiscal_repository import FiscalRepository
 from src.schemas.autuado import AutuadoCreate
 
 

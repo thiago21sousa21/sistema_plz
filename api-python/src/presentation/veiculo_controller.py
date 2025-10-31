@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from src.schemas.veiculo import VeiculoCreate
-from src.repositorio.veiculo_repository import VeiculoRepository
+from src.persistence.veiculo_repository import VeiculoRepository
 from src.service.veiculo_service import VeiculoService
 
 veiculo_router = APIRouter()

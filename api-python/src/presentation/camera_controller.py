@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from src.repositorio.camera_repository import CameraRepository
+from src.persistence.camera_repository import CameraRepository
 from src.schemas.camera import CreateCamera, Camera
 camera_router = APIRouter()
 

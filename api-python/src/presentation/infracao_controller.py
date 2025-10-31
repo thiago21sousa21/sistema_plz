@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from src.schemas.infracao import InfracaoCreate
-from src.repositorio.infracao_repository import  InfracaoRepository
+from src.persistence.infracao_repository import  InfracaoRepository
 from src.service.infracao_service import InfracaoService
 
 infracao_router = APIRouter()

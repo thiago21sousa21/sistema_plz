@@ -1,7 +1,7 @@
-from src.repositorio.infracao_repository import InfracaoRepository
-from src.repositorio.fiscal_repository import FiscalRepository
-from src.repositorio.evento_repository import EventoRepository
-from src.repositorio.autuado_repository import AutuadoRepository
+from src.persistence.infracao_repository import InfracaoRepository
+from src.persistence.fiscal_repository import FiscalRepository
+from src.persistence.evento_repository import EventoRepository
+from src.persistence.autuado_repository import AutuadoRepository
 from src.schemas.infracao import InfracaoCreate
 
 

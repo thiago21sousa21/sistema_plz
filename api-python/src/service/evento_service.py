@@ -1,6 +1,6 @@
-from src.repositorio.evento_repository import EventoRepository
-from src.repositorio.fiscal_repository import FiscalRepository
-from src.repositorio.camera_repository import CameraRepository
+from src.persistence.evento_repository import EventoRepository
+from src.persistence.fiscal_repository import FiscalRepository
+from src.persistence.camera_repository import CameraRepository
 from src.schemas.evento import EventoCreate
 
 

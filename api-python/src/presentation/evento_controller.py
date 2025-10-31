@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from src.schemas.evento import EventoCreate
-from src.repositorio.evento_repository import  EventoRepository
+from src.persistence.evento_repository import  EventoRepository
 from src.service.evento_service import EventoService
 
 evento_router = APIRouter()
