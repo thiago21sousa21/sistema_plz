@@ -90,3 +90,12 @@ ALTER TABLE evento
     FOREIGN KEY (fiscal_id) REFERENCES fiscal(id),
   ADD CONSTRAINT FK_evento_camera_id_REF_camera_id
     FOREIGN KEY (camera_id) REFERENCES camera(id);
+  
+ALTER TABLE infracao
+  ADD CONSTRAINT FK_infracao_fiscal_id_REF_fiscal_id
+    FOREIGN KEY (fiscal_id) REFERENCES fiscal(id),
+  ADD CONSTRAINT FK_infracao_evento_id_REF_evento_id
+    FOREIGN KEY (evento_id) REFERENCES evento(id),
+  ADD CONSTRAINT FK_infracao_autuado_id_REF_autuado_id
+    FOREIGN KEY (autuado_id) REFERENCES autuado(id);
+        

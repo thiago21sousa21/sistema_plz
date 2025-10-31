@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from connection.connection import DatabaseConnection
+from src.config.connection.connection import DatabaseConnection
 from rich import print
 from rich.table import Table
 
